@@ -18,8 +18,8 @@ Additionally, we demonstrate that approaching a native inter-modal task (e.g., z
 
 ![assets/teaser.png](assets/teaser.png "Teaser of the method")
 
-**Left**: The inter-modal contrastive loss used in pretraining enforces paired images and texts to be at a given distance $r$ (e.g., $r_{\text{dog}}$ and $r_{\text{cat}}$) but does not encourage **intra-modal** alignment. Consequently, intra-modal similarity scores might not correspond to those of actual images and texts (e.g., $d_1 < d_2$).
-**Right**: We show that the common practice of individually exploiting only one encoder is suboptimal. Approaching intra-modal tasks (e.g., image-to-image retrieval) **inter-modally** via **modality inversion** improves performance.
+***Left***: The inter-modal contrastive loss used in pretraining enforces paired images and texts to be at a given distance $r$ (e.g., $r_{\text{dog}}$ and $r_{\text{cat}}$) but does not encourage **intra-modal** alignment. Consequently, intra-modal similarity scores might not correspond to those of actual images and texts (e.g., $d_1 < d_2$).
+***Right***: We show that the common practice of individually exploiting only one encoder is suboptimal. Approaching intra-modal tasks (e.g., image-to-image retrieval) **inter-modally** via **modality inversion** improves performance.
 
 ## Citation
 ```bibtex
