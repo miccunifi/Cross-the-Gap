@@ -1,10 +1,11 @@
 # Cross the Gap (ICLR 2025)
 ### Exposing the Intra-modal Misalignment in CLIP via Modality Inversion
 
+[![arXiv](https://img.shields.io/badge/arXiv-Paper-<COLOR>.svg)](https://arxiv.org/abs/2502.04263)
 [![ICLR](https://img.shields.io/badge/OpenReview-Paper-red.svg)](https://openreview.net/forum?id=VVVfuIcmKR)
 [![GitHub Stars](https://img.shields.io/github/stars/miccunifi/Cross-the-Gap?style=social)](https://github.com/miccunifi/Cross-the-Gap)
 
-This is the **official repository** of the [**ICLR 2025 paper**](https://openreview.net/forum?id=VVVfuIcmKR) 
+This is the **official repository** of the [**ICLR 2025 paper**](https://arxiv.org/abs/2502.04263) 
 "*Cross the Gap: Exposing the Intra-modal Misalignment in CLIP via Modality Inversion*" 
 by Marco Mistretta, Alberto Baldrati, Lorenzo Agnolucci, Marco Bertini and Andrew David Bagdanov.
 
