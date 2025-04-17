@@ -1,0 +1,4 @@
+clip_model_name: ViT-B-16-SigLIP
+use_open_clip: true   # if True, use open clip
+open_clip_pretrained: "webli"   # open clip pretrained model
+oti_template_prompt: "a photo of {}"

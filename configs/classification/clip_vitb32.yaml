@@ -1,0 +1,4 @@
+clip_model_name: ViT-B/32
+use_open_clip: false   # if True, use open clip
+open_clip_pretrained: ""   # open clip pretrained model
+oti_template_prompt: "a photo of {}"

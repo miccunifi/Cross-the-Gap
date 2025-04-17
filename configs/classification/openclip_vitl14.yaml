@@ -1,0 +1,4 @@
+clip_model_name: ViT-L/14
+use_open_clip: true   # if True, use open clip
+open_clip_pretrained: "datacomp_xl_s13b_b90k"   # open clip pretrained model
+oti_template_prompt: "a photo of {}"

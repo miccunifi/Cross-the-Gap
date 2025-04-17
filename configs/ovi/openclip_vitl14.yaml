@@ -1,0 +1,28 @@
+# General
+exp_name: openclip_vitl14    # name of the experiment
+clip_model_name: ViT-L/14  # name of the CLIP model
+resume_experiment: false    # resume training and logging of the experiment with the same name if it exists
+seed: 42    # seed for reproducibility
+validate: false  # if True, validate the model
+
+# Data
+dataroot: ""   # base path for the datasets
+dataset_name: ""   # name of the dataset
+split: ""    # split of the dataset to use. By default, it is the same split of the paper
+use_class_names: false   # if True, use class names as text, works only with DASSL datasets!
+
+# Optimization
+learning_rate: !!float 2e-2   # learning rate
+batch_size: 64    # batch size
+ovi_steps: 1000   # optimization steps
+num_pseudo_tokens: 2    # number of pseudo tokens
+save_frequency: 100    # frequency of saving the model
+
+# Loss
+weight_decay: 0.01   # weight decay
+template_sentence: "a photo of {}"   # which template sentence to use. Used only when use_class_names is True
+
+# Miscellaneous
+use_open_clip: true   # if True, use open clip
+open_clip_pretrained: "datacomp_xl_s13b_b90k"   # open clip pretrained model
+
