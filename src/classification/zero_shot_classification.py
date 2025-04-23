@@ -53,9 +53,6 @@ def update_cfg(cfg, args):
     if args.seed:
         cfg.SEED = args.seed
 
-    if args.trainer:
-        cfg.TRAINER.NAME = args.trainer
-
     cfg.DATASET.NAME = lower_to_name[args.dataset_name]
     cfg.MODEL.BACKBONE.NAME = args.clip_model_name
     cfg.MODEL.BACKBONE.OPEN_CLIP_PRETRAINED = args.open_clip_pretrained
@@ -111,16 +108,22 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--dataroot", type=str, default="", help="path to dataset", required=True)
-    parser.add_argument("--output-dir", type=str, default="", help="output directory", required=True)
-    parser.add_argument("--dataset_name", type=str, help="name of dataset", required=True)
-    parser.add_argument('--config', type=str, help='Configuration file', required=True)
-    parser.add_argument("--seed", type=int, default=1, help="only positive value enables a fixed seed")
-    parser.add_argument("--trainer", type=str, default="", help="name of trainer")
-    parser.add_argument("--eval-type", type=str, choices=['oti', 'ovi', 'zeroshot'], default='zeroshot')
-
-    # OTI and OVI SPECIFIC
-    parser.add_argument("--exp-name", type=str, help="OTI/OVI experiment name", default="")
+    parser.add_argument("--dataroot", type=str, default="", help="Root directory containing all datasets.",
+                        required=True)
+    parser.add_argument("--output-dir", type=str, default="", help="Directory where output file will be saved.",
+                        required=True)
+    parser.add_argument("--dataset_name", type=str, help="Name of the dataset to use.", required=True)
+    parser.add_argument('--config', type=str, required=True,
+                        help="Path to the configuration file containing experiment parameters.")
+    parser.add_argument("--seed", type=int, default=1,
+                        help="Set a fixed random seed for reproducibility (only applied if > 0).")
+    parser.add_argument("--eval-type", type=str, choices=['oti', 'ovi', 'zeroshot'], default='zeroshot',
+                        help="Evaluation mode:\n"
+                             "'oti' – classify using OTI-inverted features instead of image features,\n"
+                             "'ovi' – classify using OVI-inverted features instead of textual prompts,\n"
+                             "'zeroshot' – use CLIP's original image/text features for zero-shot classification.")
+    parser.add_argument("--exp-name", type=str, help="Experiment name used to load precomputed OTI/OVI features.",
+                        default="")
 
     args = parser.parse_args()
 

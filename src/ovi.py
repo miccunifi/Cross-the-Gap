@@ -45,7 +45,7 @@ def ovi_main(args):
     dataset = get_dataset(args.dataroot, args.dataset_name, args.split, clip_preprocess, return_image=False)
     loader = DataLoader(dataset, batch_size=args.batch_size, num_workers=8)
 
-    # Workaround when using classnames as text
+    # Needed when using classnames as text
     if args.use_class_names:
         assert args.dataset_name in DASSL_DATASETS, "The dataset should be a DASSL dataset"
         classnames = list(set([el.classname for el in dataset.data]))

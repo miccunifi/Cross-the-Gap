@@ -178,7 +178,7 @@ def get_retrieval_metrics(dataset_name: str, similarities: torch.Tensor, query_l
         return compute_roxford_rparis_metrics(dataset_name, similarities)
     elif dataset_name in ['coco_text', 'flickr30k_text', 'nocaps_text', 'cub2011', 'sop',
                           'newsgroup_text',
-                          'imdb_text'] + DASSL_DATASETS + NANOBEIR_DATASETS:  # I think this is the most general case
+                          'imdb_text'] + DASSL_DATASETS + NANOBEIR_DATASETS:
         return compute_metrics(dataset_name, similarities, query_labels, gallery_labels, is_query_gallery_split_same)
     else:
         raise ValueError(f"Unknown dataset {dataset_name}")
@@ -361,33 +361,41 @@ def get_pseudo_tokens(dataset_name, exp_name, eval_type: str, data_split: str, c
 
 def add_args_to_parser():
     parser = ArgumentParser()
-    parser.add_argument("--dataroot", required=True, help="path to datasets root")
-    parser.add_argument("--dataset_name", type=str, required=True)
-    parser.add_argument("--clip_model_name", required=True, type=str, help="clip model name, e.g. 'ViT-B/32'")
+    parser.add_argument("--dataroot", required=True, help="Root directory containing all datasets.")
+    parser.add_argument("--dataset_name", type=str, required=True, help="Name of the dataset to evaluate.")
+    parser.add_argument("--clip_model_name", required=True, type=str, help="CLIP model variant to use, e.g. 'ViT-B/32'.")
 
     parser.add_argument("--query_eval_type", type=str,
                         choices=['oti', 'ovi', 'image', 'text'],
-                        required=True, help="If 'oti' evaluate directly using the inverted oti pseudo tokens, "
-                                            'if "ovi" evaluate directly using the inverted ovi pseudo tokens,'
-                                            "If 'image' use only the image features"
-                                            "If 'text' use only the text features")
+                        required=True, help="Type of feature used for query:\n"
+                                            "'oti' for OTI-inverted features,\n"
+                                            "'ovi' for OVI-inverted features,\n"
+                                            "'image' for original image encoder features,\n"
+                                            "'text' for original text encoder features.")
     parser.add_argument("--gallery_eval_type", type=str,
                         choices=['oti', 'ovi', 'image', 'text'],
-                        required=True, help="If 'oti' evaluate directly using the inverted oti pseudo tokens, "
-                                            'if "ovi" evaluate directly using the inverted ovi pseudo tokens,'
-                                            "If 'image' use only the image features"
-                                            "If 'text' use only the text features")
+                        required=True, help="Type of feature used for gallery:\n"
+                                            "'oti' for OTI-inverted features,\n"
+                                            "'ovi' for OVI-inverted features,\n"
+                                            "'image' for original image encoder features,\n"
+                                            "'text' for original text encoder features.")
 
-    parser.add_argument("--oti_template_sentence", type=str, default='a photo of {}')
+    parser.add_argument("--oti_template_sentence", type=str, default='a photo of {}',
+                        help="Template sentence used in OTI for generating textual pseudo-tokens (e.g., 'a photo of {}').")
 
-    parser.add_argument("--query_split", type=str, default=None, help="which split to use for queries")
-    parser.add_argument("--gallery_split", type=str, default=None, help="which split to use for gallery")
+    parser.add_argument("--query_split", type=str, default=None,
+                        help="Dataset split used for query samples (e.g., 'train', 'test').")
+    parser.add_argument("--gallery_split", type=str, default=None,
+                        help="Dataset split used for gallery samples (e.g., 'train', 'test').")
 
-    parser.add_argument("--query_exp_name", type=str, help="experiment name ('phi' or 'oti' to evaluate")
-    parser.add_argument("--gallery_exp_name", type=str, help="experiment name ('phi' or 'oti' to evaluate")
-
-    parser.add_argument("--use_open_clip", action='store_true', help="Use OpenCLIP instead of CLIP", default=False)
-    parser.add_argument("--open_clip_pretrained", type=str, help="OpenCLIP pretrained model name", default=None)
+    parser.add_argument("--query_exp_name", type=str,
+                        help="Experiment name for loading precomputed OTI/OVI query features.")
+    parser.add_argument("--gallery_exp_name", type=str,
+                        help="Experiment name for loading precomputed OTI/OVI gallery features.")
+    parser.add_argument("--use_open_clip", action='store_true', help="Enable to use OpenCLIP instead of OpenAI CLIP.",
+                        default=False)
+    parser.add_argument("--open_clip_pretrained", type=str,
+                        help="Name of the pretrained weights for OpenCLIP (e.g., 'laion2b_s34b_b79k').", default=None)
 
     return parser
 

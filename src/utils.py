@@ -158,7 +158,8 @@ def retrieval_average_precision_atk(preds: torch.Tensor, target: torch.Tensor,
     return torch.sum(precisions) / min(number_of_relevant, top_k)
 
 
-def load_clip(clip_model_name, open_clip_pretrained, use_open_clip, local_device):
+def load_clip(clip_model_name, open_clip_pretrained="", use_open_clip=False,
+              local_device=torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")):
     if "SLIP" in clip_model_name:
         print("Loading SLIP model: ", clip_model_name)
         clip_model, clip_preprocess = load_slip(clip_model_name, device=local_device)
