@@ -77,12 +77,18 @@ chmod +x install_requirements.sh
 </details>
 
 <details>
-<summary><h2>Dataset Installation Guide</h2></summary> 
+<summary><h2>Dataset Installation Guide</h2></summary>
 
-Our code currently supports **25+ datasets** for the tasks of image-to-image retrieval, text-to-text retrieval, and zero-shot classification.
-Classification datasets have been downloaded following the [CoOp Dataset Preparation Guide](https://github.com/KaiyangZhou/CoOp/blob/main/DATASETS.md).
+Our code currently supports **27 datasets** for the tasks of image-to-image retrieval, text-to-text retrieval, and zero-shot classification.
 
-A Dataset Preparation Guide will be made as soon as possible for the remaining datasets.
+**For detailed dataset setup instructions, please refer to [DATASETS.md](DATASETS.md).**
+
+The guide provides comprehensive instructions for:
+- **Image-to-Image Retrieval** (15 datasets): CUB-200-2011, Stanford Online Products, ROxford5k, RParis6k, + 11 classification datasets
+- **Text-to-Text Retrieval** (12 datasets): COCO, Flickr30K, NoCaps, IMDB, 20 Newsgroups, + 7 NanoBEIR datasets
+- **Zero-Shot Classification** (11 datasets): Following CoOp format (also used for image retrieval)
+
+### Adding a Custom Dataset
 
 To **add a new dataset**, create a `<dataset_name>.py` file in the `src/datasets/` directory with the following methods:
 
